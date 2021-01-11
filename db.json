@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "fname": "deepak",
+      "id": 1
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 2
+    }
+  ]
+}
