@@ -20,28 +20,55 @@ export class Userform extends React.Component{
                 },
             users :[]
         }
+        BackendService.getUser().done((response)=>{
+            this.setState({
+                users:response
+            }) 
+        });
+    }
+    loadData(){
+        const promiss = BackendService.getUser();
+        promiss.done((response)=>{
+            this.setState({
+                users:[...this.state.users,response]
+            }) 
+        });
     }
     save = (event) =>{
      //   this.state.users.push(this.state.user)
         BackendService.saveUser(this.state.user, (response) =>{
             this.setState({
-                users:[...this.state.users,Object.assign({},this.state.user)]
+                users:[...this.state.users,response]
             })
         }).fail((error) =>{
             alert("something went wrong, please retry");
         });
         
     };
-    deleteUser = (index) =>{
+    deleteUser = (index,userId) =>{
         console.log(this,index);
         const dicision = window.confirm("Are you sure");
         if(!dicision){
             return;
         }
-        this.state.users.splice(index,1)
-         this.setState({
-             users:this.state.users
-         })
+        const promiss = BackendService.deleteUser(userId);
+        promiss.done((response) =>{
+            this.state.users.splice(index,1)
+            this.setState({
+                users:this.state.users
+            })
+        });
+        promiss.fail((response)=>{
+            alert("Something went wrong, please retry");
+        })
+        console.log(promiss);
+        // BackendService.deleteUser(userId,(response) =>{
+        //     this.state.users.splice(index,1)
+        //     this.setState({
+        //         users:this.state.users
+        //     })
+        // })
+        
     };
     onChangeHandleEvent = (event)=>{
         this.setState ({ //to rerender, call setState
@@ -75,12 +102,12 @@ export class Userform extends React.Component{
                                <td>{user.fname}</td>
                                <td>{user.age}</td>
                                <td>{user.salary}</td>
-                               <td><button id={index} onClick={this.deleteUser.bind(this,index)}>Delete</button></td>
+                               <td><button id={user.id} onClick={this.deleteUser.bind(this,index,user.id)}>Delete</button></td>
                            </tr>
                        })}
                     </tbody>
                 </table>
             </div>
-        )
+        );
     }
 }
