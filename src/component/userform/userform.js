@@ -16,7 +16,8 @@ export class Userform extends React.Component{
             user :{
                     fname : 'Deepak',
                     age :30,
-                    salary:200
+                    salary:200,
+                    gender:'Male'
                 },
             users :[]
         }
@@ -88,6 +89,8 @@ export class Userform extends React.Component{
                 <input value={this.state.user.salary} name="salary"
                     onChange={this.onChangeHandleEvent}                
                 placeholder="Salary" style={{background:this.props.color}}></input>
+                <input type="radio" checked name="gender" onChange={this.onChangeHandleEvent} value='Male'/>Male
+                <input type="radio" name="gender" onChange={this.onChangeHandleEvent} value='Female'/>Female
                 <button onClick={this.save}>Save</button>
                 
                 <table>
@@ -102,6 +105,7 @@ export class Userform extends React.Component{
                                <td>{user.fname}</td>
                                <td>{user.age}</td>
                                <td>{user.salary}</td>
+                               <td>{user.gender}</td>
                                <td><button id={user.id} onClick={this.deleteUser.bind(this,index,user.id)}>Delete</button></td>
                            </tr>
                        })}
