@@ -1,4 +1,5 @@
 {
+  "roles": ["Programmer","Lead","Manager"],
   "users": [
     {
       "fname": "deepak",
@@ -9,6 +10,142 @@
       "age": "30",
       "salary": "200",
       "id": 2
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 3
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 4
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 5
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 6
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 7
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 8
+    },
+    {
+      "id": 9
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 11
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 13
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 14
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 16
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 17
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 19
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 21
+    },
+    {
+      "fname": "Deepak4",
+      "age": "305",
+      "salary": "200",
+      "id": 23
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 25
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 26
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 28
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 30
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 31
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 32
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "id": 33
+    },
+    {
+      "fname": "Deepak",
+      "age": "30",
+      "salary": "200",
+      "gender": "Female",
+      "id": 34
     }
   ]
 }

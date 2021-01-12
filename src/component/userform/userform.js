@@ -10,6 +10,7 @@ import "./userform.css"
 // }
 
 export class Userform extends React.Component{
+   
     constructor(){ //only one constructor allow per class
         super();
         this.state ={
@@ -17,24 +18,33 @@ export class Userform extends React.Component{
                     fname : 'Deepak',
                     age :30,
                     salary:200,
-                    gender:'Male'
+                    gender:'Male',
+                    role:'Programmer'
                 },
-            users :[]
+            users :[],
+            roles : []
         }
         BackendService.getUser().done((response)=>{
             this.setState({
                 users:response
             }) 
         });
-    }
-    loadData(){
-        const promiss = BackendService.getUser();
-        promiss.done((response)=>{
+        BackendService.getRoles().done((response)=>{
             this.setState({
-                users:[...this.state.users,response]
+                roles:response
             }) 
         });
-    }
+    };
+   // roles = ['Programmer','Lead','Manager'];
+    // loadData(){
+    //     const promiss = BackendService.getUser();
+    //     promiss.done((response)=>{
+    //         this.setState({
+    //             users:response
+    //         }) 
+    //     });
+    // }
+    
     save = (event) =>{
      //   this.state.users.push(this.state.user)
         BackendService.saveUser(this.state.user, (response) =>{
@@ -79,6 +89,7 @@ export class Userform extends React.Component{
     };
     render (){
         const userModel = this.state.user;
+        
         return (
             <div>
                 <input value={userModel.fname} name="fname" onChange={this.onChangeHandleEvent} 
@@ -91,6 +102,15 @@ export class Userform extends React.Component{
                 placeholder="Salary" style={{background:this.props.color}}></input>
                 <input type="radio" checked name="gender" onChange={this.onChangeHandleEvent} value='Male'/>Male
                 <input type="radio" name="gender" onChange={this.onChangeHandleEvent} value='Female'/>Female
+               
+                {this.state.roles.map((role) =>{
+                    return (<span>
+                        <input type="radio" value={role} onChange={this.handleEvent} name="role"/>{role}</span>
+                        )
+                })
+                }
+               
+
                 <button onClick={this.save}>Save</button>
                 
                 <table>
