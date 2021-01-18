@@ -19,10 +19,12 @@ export class Userform extends React.Component{
                     age :30,
                     salary:200,
                     gender:'Male',
-                    role:'Programmer'
+                    role:'Programmer',
+                    skills:[]
                 },
             users :[],
-            roles : []
+            roles : [],
+            sortOrder:true
         }
         BackendService.getUser().done((response)=>{
             this.setState({
@@ -81,12 +83,65 @@ export class Userform extends React.Component{
         // })
         
     };
-    onChangeHandleEvent = (event)=>{
-        this.setState ({ //to rerender, call setState
-           // user :{...this.state.user, [event.target.name] : event.target.value}
-            user :Object.assign(this.state.user, {[event.target.name] : event.target.value})
+    searchEvent = (event) =>{
+        let query = '';
+        if(event.target.value.length > 0){
+            query = "?fname="+event.target.value
+        }
+        const promiss = BackendService.searchUser(query);
+        promiss.done((response) =>{
+            this.setState({
+                users:response
+            })
         });
+        promiss.fail((response)=>{
+            alert("Something went wrong, please retry");
+        })
+        console.log(promiss);
+    }
+    onChangeHandleEvent = (event)=>{
+        if(event.target.type = 'checkbox'){
+            console.log("checkbox");
+            if(event.target.checked){
+                this.state.user[event.target.name].push(event.target.value);
+            }else{
+                let i = -1;
+                this.state.user[event.target.name].map( (value, index)=> {
+                    if(value == event.target.value){
+                        i = index;
+                    }
+                });
+                if(i>-1){
+                    this.state.user[event.target.name].splice(i, 1);
+                }    
+            }
+        }else{
+            this.setState ({ //to rerender, call setState
+            // user :{...this.state.user, [event.target.name] : event.target.value}
+                user :Object.assign(this.state.user, {[event.target.name] : event.target.value})
+            });
+        }
     };
+    
+    sortAge = (event)=>{
+        let sorttype = this.state.sortOrder;
+        
+        sorttype = !sorttype
+       
+        this.state.users.sort((user1,user2)=>{
+            if(sorttype){              
+                return user2.age-user1.age
+            }else{                
+                return user1.age-user2.age
+            }
+        });
+        this.setState({
+            users:this.state.users,
+            sortOrder: sorttype
+            
+        })
+        console.log("Sorted")
+    }
     render (){
         const userModel = this.state.user;
         
@@ -102,6 +157,10 @@ export class Userform extends React.Component{
                 placeholder="Salary" style={{background:this.props.color}}></input>
                 <input type="radio" checked name="gender" onChange={this.onChangeHandleEvent} value='Male'/>Male
                 <input type="radio" name="gender" onChange={this.onChangeHandleEvent} value='Female'/>Female
+
+                <input type="checkbox" name="skills" onChange={this.onChangeHandleEvent} value='React'/>React
+                <input type="checkbox" name="skills" onChange={this.onChangeHandleEvent} value='Java'/>Java
+                <input type="checkbox" name="skills" onChange={this.onChangeHandleEvent} value='Angular'/>Angular
                
                 {this.state.roles.map((role) =>{
                     return (<span>
@@ -115,17 +174,24 @@ export class Userform extends React.Component{
                 
                 <table>
                     <thead>
-                        <th>First name</th>
-                        <th>Age</th>
+                        <th>First name
+                            <input type="text" name="searchName" onChange={this.searchEvent}/>
+                        </th>
+                        <th onClick={this.sortAge}>Age</th>
                         <th>Salary</th>
+                        <th>Role</th>
                     </thead>
                     <tbody>
                        {this.state.users.map((user,index) =>{
+                           let skills = '';
+                           if (Array.isArray(user['skills[]']))
+                               skills = user['skills[]'].map(skill => skill + ' ');
                            return <tr>
                                <td>{user.fname}</td>
                                <td>{user.age}</td>
                                <td>{user.salary}</td>
                                <td>{user.gender}</td>
+                               <td>{skills}</td>
                                <td><button id={user.id} onClick={this.deleteUser.bind(this,index,user.id)}>Delete</button></td>
                            </tr>
                        })}

@@ -18,6 +18,12 @@ export class BackendService{
         });
      }
 
+     static searchUser(searchQuery){
+      return jquery.ajax(BASE_URL+searchQuery,{
+          type:'GET'
+      });
+   }
+
      static getUser(){
         return jquery.ajax(BASE_URL,{
             type:'get'
