@@ -1,8 +1,8 @@
 import { Link, Route, BrowserRouter as Router,Switch } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
-import {Userform  } from "./component/userform/userform";
 import {Home  } from "./component/Home";
+import { UserformContainer } from "./container/UserformContainer";
 
 function App() {
   return ( //JSX
@@ -23,7 +23,7 @@ function App() {
             <Home></Home>
           </Route>
           <Route exact path="/Userform">
-            <Userform></Userform>
+            <UserformContainer></UserformContainer>
           </Route>
         </switch>
         </Router>
